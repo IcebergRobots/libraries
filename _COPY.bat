@@ -1,5 +1,5 @@
 @echo OFF
-color 09
+color 0f
 
 echo ICEBERG ROBOTS
 echo --------------
