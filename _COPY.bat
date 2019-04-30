@@ -7,7 +7,11 @@ echo Time: %TIME%
 echo copying new libraries to Computer %COMPUTERNAME%...
 echo from %cd% to %HOMEPATH%\Documents\Arduino\libraries
 echo --------------
-ROBOCOPY %cd%\ %HOMEPATH%\Documents\Arduino\libraries\ /S >nul
+IF EXIST E:\Documents\Arduino\libraries (
+	ROBOCOPY %cd%\ E:\Documents\Arduino\libraries\ /S >nul
+) ELSE (
+	ROBOCOPY %cd%\ %HOMEPATH%\Documents\Arduino\libraries\ /S >nul
+)
 echo Time: %TIME%
 echo finished with exitcode %ERRORLEVEL%
 echo And just for fun a random Number: %RANDOM%
@@ -18,7 +22,12 @@ if '%wahl%' == 'y' goto yes
 Goto End
 :yes
 echo All right, here is the folder. Bye!
-explorer %HOMEPATH%\Documents\Arduino\libraries
+IF EXIST E:\Documents\Arduino\libraries (
+	explorer E:\Documents\Arduino\libraries
+) ELSE (
+	explorer %HOMEPATH%\Documents\Arduino\libraries
+)
+
 TIMEOUT /T 3
 :End
 
