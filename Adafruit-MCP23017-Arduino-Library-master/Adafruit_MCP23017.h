@@ -21,7 +21,7 @@
                                     // will work with Adafruit ATtiny85's
                                     //But Arduino Gemma doesn't use that library
                                     // We do NOT want to include Wire if it's an arduino Gemma
-  #include <Wire.h>
+  #include <HardWire.h>
 #else
   #include <TinyWireM.h>
   #define Wire TinyWireM
