@@ -683,31 +683,53 @@ void Adafruit_BNO055::setSensorOffsets(const uint8_t *calibData) {
 
   /* A writeLen() would make this much cleaner */
   write8(ACCEL_OFFSET_X_LSB_ADDR, calibData[0]);
+  delay(1);
   write8(ACCEL_OFFSET_X_MSB_ADDR, calibData[1]);
+  delay(1);
   write8(ACCEL_OFFSET_Y_LSB_ADDR, calibData[2]);
+  delay(1);
   write8(ACCEL_OFFSET_Y_MSB_ADDR, calibData[3]);
+  delay(1);
   write8(ACCEL_OFFSET_Z_LSB_ADDR, calibData[4]);
+  delay(1);
   write8(ACCEL_OFFSET_Z_MSB_ADDR, calibData[5]);
+  delay(1);
 
   write8(MAG_OFFSET_X_LSB_ADDR, calibData[6]);
+  delay(1);
   write8(MAG_OFFSET_X_MSB_ADDR, calibData[7]);
+  delay(1);
   write8(MAG_OFFSET_Y_LSB_ADDR, calibData[8]);
+  delay(1);
   write8(MAG_OFFSET_Y_MSB_ADDR, calibData[9]);
+  delay(1);
   write8(MAG_OFFSET_Z_LSB_ADDR, calibData[10]);
+  delay(1);
   write8(MAG_OFFSET_Z_MSB_ADDR, calibData[11]);
+  delay(1);
 
   write8(GYRO_OFFSET_X_LSB_ADDR, calibData[12]);
+  delay(1);
   write8(GYRO_OFFSET_X_MSB_ADDR, calibData[13]);
+  delay(1);
   write8(GYRO_OFFSET_Y_LSB_ADDR, calibData[14]);
+  delay(1);
   write8(GYRO_OFFSET_Y_MSB_ADDR, calibData[15]);
+  delay(1);
   write8(GYRO_OFFSET_Z_LSB_ADDR, calibData[16]);
+  delay(1);
   write8(GYRO_OFFSET_Z_MSB_ADDR, calibData[17]);
+  delay(1);
 
   write8(ACCEL_RADIUS_LSB_ADDR, calibData[18]);
+  delay(1);
   write8(ACCEL_RADIUS_MSB_ADDR, calibData[19]);
+  delay(1);
 
   write8(MAG_RADIUS_LSB_ADDR, calibData[20]);
+  delay(1);
   write8(MAG_RADIUS_MSB_ADDR, calibData[21]);
+  delay(1);
 
   setMode(lastMode);
 }
