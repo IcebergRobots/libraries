@@ -340,6 +340,7 @@ void Adafruit_BNO055::getRevInfo(adafruit_bno055_rev_info_t *info) {
  */
 void Adafruit_BNO055::getCalibration(uint8_t *sys, uint8_t *gyro,
                                      uint8_t *accel, uint8_t *mag) {
+	
   uint8_t calData = read8(BNO055_CALIB_STAT_ADDR);
   if (sys != NULL) {
     *sys = (calData >> 6) & 0x03;
@@ -449,6 +450,7 @@ imu::Quaternion Adafruit_BNO055::getQuat() {
   x = y = z = w = 0;
 
   /* Read quat data (8 bytes) */
+  
   readLen(BNO055_QUATERNION_DATA_W_LSB_ADDR, buffer, 8);
   w = (((uint16_t)buffer[1]) << 8) | ((uint16_t)buffer[0]);
   x = (((uint16_t)buffer[3]) << 8) | ((uint16_t)buffer[2]);
@@ -597,6 +599,7 @@ bool Adafruit_BNO055::getSensorOffsets(uint8_t *calibData) {
     adafruit_bno055_opmode_t lastMode = _mode;
     setMode(OPERATION_MODE_CONFIG);
 
+	
     readLen(ACCEL_OFFSET_X_LSB_ADDR, calibData, NUM_BNO055_OFFSET_REGISTERS);
 
     setMode(lastMode);
@@ -627,14 +630,18 @@ bool Adafruit_BNO055::getSensorOffsets(
                                   (read8(ACCEL_OFFSET_X_LSB_ADDR));
     offsets_type.accel_offset_y = (read8(ACCEL_OFFSET_Y_MSB_ADDR) << 8) |
                                   (read8(ACCEL_OFFSET_Y_LSB_ADDR));
+	 
     offsets_type.accel_offset_z = (read8(ACCEL_OFFSET_Z_MSB_ADDR) << 8) |
                                   (read8(ACCEL_OFFSET_Z_LSB_ADDR));
 
     /* Magnetometer offset range = +/- 6400 LSB where 1uT = 16 LSB */
+	 
     offsets_type.mag_offset_x =
         (read8(MAG_OFFSET_X_MSB_ADDR) << 8) | (read8(MAG_OFFSET_X_LSB_ADDR));
+	 
     offsets_type.mag_offset_y =
         (read8(MAG_OFFSET_Y_MSB_ADDR) << 8) | (read8(MAG_OFFSET_Y_LSB_ADDR));
+	 
     offsets_type.mag_offset_z =
         (read8(MAG_OFFSET_Z_MSB_ADDR) << 8) | (read8(MAG_OFFSET_Z_LSB_ADDR));
 
@@ -645,18 +652,23 @@ bool Adafruit_BNO055::getSensorOffsets(
        250 dps = +/- 4000 LSB
        125 dps = +/- 2000 LSB
        ... where 1 DPS = 16 LSB */
+	 
     offsets_type.gyro_offset_x =
         (read8(GYRO_OFFSET_X_MSB_ADDR) << 8) | (read8(GYRO_OFFSET_X_LSB_ADDR));
+	 
     offsets_type.gyro_offset_y =
         (read8(GYRO_OFFSET_Y_MSB_ADDR) << 8) | (read8(GYRO_OFFSET_Y_LSB_ADDR));
+	 
     offsets_type.gyro_offset_z =
         (read8(GYRO_OFFSET_Z_MSB_ADDR) << 8) | (read8(GYRO_OFFSET_Z_LSB_ADDR));
 
     /* Accelerometer radius = +/- 1000 LSB */
+	 
     offsets_type.accel_radius =
         (read8(ACCEL_RADIUS_MSB_ADDR) << 8) | (read8(ACCEL_RADIUS_LSB_ADDR));
 
     /* Magnetometer radius = +/- 960 LSB */
+	 
     offsets_type.mag_radius =
         (read8(MAG_RADIUS_MSB_ADDR) << 8) | (read8(MAG_RADIUS_LSB_ADDR));
 
@@ -683,53 +695,53 @@ void Adafruit_BNO055::setSensorOffsets(const uint8_t *calibData) {
 
   /* A writeLen() would make this much cleaner */
   write8(ACCEL_OFFSET_X_LSB_ADDR, calibData[0]);
-  delay(1);
+  
   write8(ACCEL_OFFSET_X_MSB_ADDR, calibData[1]);
-  delay(1);
+  
   write8(ACCEL_OFFSET_Y_LSB_ADDR, calibData[2]);
-  delay(1);
+  
   write8(ACCEL_OFFSET_Y_MSB_ADDR, calibData[3]);
-  delay(1);
+  
   write8(ACCEL_OFFSET_Z_LSB_ADDR, calibData[4]);
-  delay(1);
+  
   write8(ACCEL_OFFSET_Z_MSB_ADDR, calibData[5]);
-  delay(1);
+  
 
   write8(MAG_OFFSET_X_LSB_ADDR, calibData[6]);
-  delay(1);
+  
   write8(MAG_OFFSET_X_MSB_ADDR, calibData[7]);
-  delay(1);
+  
   write8(MAG_OFFSET_Y_LSB_ADDR, calibData[8]);
-  delay(1);
+  
   write8(MAG_OFFSET_Y_MSB_ADDR, calibData[9]);
-  delay(1);
+  
   write8(MAG_OFFSET_Z_LSB_ADDR, calibData[10]);
-  delay(1);
+  
   write8(MAG_OFFSET_Z_MSB_ADDR, calibData[11]);
-  delay(1);
+  
 
   write8(GYRO_OFFSET_X_LSB_ADDR, calibData[12]);
-  delay(1);
+  
   write8(GYRO_OFFSET_X_MSB_ADDR, calibData[13]);
-  delay(1);
+  
   write8(GYRO_OFFSET_Y_LSB_ADDR, calibData[14]);
-  delay(1);
+  
   write8(GYRO_OFFSET_Y_MSB_ADDR, calibData[15]);
-  delay(1);
+  
   write8(GYRO_OFFSET_Z_LSB_ADDR, calibData[16]);
-  delay(1);
+  
   write8(GYRO_OFFSET_Z_MSB_ADDR, calibData[17]);
-  delay(1);
+  
 
   write8(ACCEL_RADIUS_LSB_ADDR, calibData[18]);
-  delay(1);
+  
   write8(ACCEL_RADIUS_MSB_ADDR, calibData[19]);
-  delay(1);
+  
 
   write8(MAG_RADIUS_LSB_ADDR, calibData[20]);
-  delay(1);
+  
   write8(MAG_RADIUS_MSB_ADDR, calibData[21]);
-  delay(1);
+  
 
   setMode(lastMode);
 }
@@ -796,6 +808,7 @@ void Adafruit_BNO055::setSensorOffsets(
  */
 bool Adafruit_BNO055::isFullyCalibrated() {
   uint8_t system, gyro, accel, mag;
+  
   getCalibration(&system, &gyro, &accel, &mag);
 
   switch (_mode) {
@@ -853,6 +866,7 @@ void Adafruit_BNO055::enterNormalMode() {
  *  @brief  Writes an 8 bit value over I2C
  */
 bool Adafruit_BNO055::write8(adafruit_bno055_reg_t reg, byte value) {
+	delay(1);
   _wire->beginTransmission(_address);
 #if ARDUINO >= 100
   _wire->write((uint8_t)reg);
@@ -871,6 +885,7 @@ bool Adafruit_BNO055::write8(adafruit_bno055_reg_t reg, byte value) {
  *  @brief  Reads an 8 bit value over I2C
  */
 byte Adafruit_BNO055::read8(adafruit_bno055_reg_t reg) {
+		delay(1);
   byte value = 0;
 
   _wire->beginTransmission(_address);
@@ -895,6 +910,7 @@ byte Adafruit_BNO055::read8(adafruit_bno055_reg_t reg) {
  */
 bool Adafruit_BNO055::readLen(adafruit_bno055_reg_t reg, byte *buffer,
                               uint8_t len) {
+	delay(1);
   _wire->beginTransmission(_address);
 #if ARDUINO >= 100
   _wire->write((uint8_t)reg);
