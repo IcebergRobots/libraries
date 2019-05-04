@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <HardWire.h>
+#include <WSWire.h>
 #include <HMC6352.h>
 
 // void constructor

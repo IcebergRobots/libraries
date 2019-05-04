@@ -29,7 +29,7 @@
  ******************************************************************************/
 
 #include <Arduino.h>
-#include <HardWire.h>
+#include <WSWire.h>
 
 #include <Eeprom24C04_16.h>
 

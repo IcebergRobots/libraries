@@ -34,7 +34,7 @@
 extern "C" {
 #include "BNO055.h"
 }
-#include <HardWire.h>
+#include <WSWire.h>
 #include "Arduino.h"
 
 /*****************************************************************************

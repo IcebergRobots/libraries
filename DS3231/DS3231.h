@@ -20,7 +20,7 @@
 //#include "WProgram.h"
 #include <Arduino.h>
 
-#include <HardWire.h>
+#include <WSWire.h>
 
 // DateTime (get everything at once) from JeeLabs / Adafruit
 // Simple general-purpose date/time class (no TZ / DST / leap second handling!)
